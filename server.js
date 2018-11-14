@@ -14,13 +14,13 @@ server.use((req, res, next) => {
   next();
  })
 
-server.use((req, res, next) => {
-  if (req.method === 'POST') {
-    req.body.createdAt = Date.now()
-  }
-  // Continue to JSON Server router
-  next()
-})
+// server.use((req, res, next) => {
+//   // if (req.method === 'POST') {
+//   //   req.body.createdAt = Date.now()
+//   // }
+//   // Continue to JSON Server router
+//   next()
+// })
 
 // 获取db数据
 const db = dbHandler('./data')

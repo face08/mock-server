@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "json-server": "^0.14.0"
+  },
+  "dependencies": {
+    "nodemon": "^1.18.6"
   }
 }
