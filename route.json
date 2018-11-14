@@ -1,5 +1,0 @@
-{
-
-  "/stockadjustbill/*": "/$1",
-  "/face/*": "/$1"
-}
