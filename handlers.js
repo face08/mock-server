@@ -3,10 +3,10 @@ const fs = require('fs')
 const _ = require('lodash')
 
 // 返回路径目录数组
-function _findSync (startAbsolutePath) {
+function _findSync(startAbsolutePath) {
   let result = []
 
-  function finder (_p) {
+  function finder(_p) {
     const files = fs.readdirSync(_p)
     files.forEach((val, index) => {
       const fPath = path.join(_p, val)
@@ -24,13 +24,26 @@ function _findSync (startAbsolutePath) {
  * 将路径转换为对象
  * ep: 'user/login.json' => { user: { login: data } }
  */
-function _handlePathToObj (_p) {
-  const arr = _p.replace('.json', '').split('\\')
-  return {[arr.join('_')]: require(path.join(__dirname, 'data', _p))}
+function _handlePathToObj(_p) {
+  let arr, obj
+  if (_p.substring(_p.length - 3) === ".js") {
+    arr = _p.replace('.js', '').split('\\')
+    let m = require(path.join(__dirname, 'data', _p))
+    obj = {
+      [arr.join('_')]: m()
+    }
+  } else {
+    arr = _p.replace('.json', '').split('\\')
+    obj = {
+      [arr.join('_')]: require(path.join(__dirname, 'data', _p))
+    }
+  }
+
+  return obj
 }
 
 // 将data目录下的文件整合为一个db数据
-function dbHandler (startPath) {
+function dbHandler(startPath) {
   let db = {}
 
   const startAbsolutePath = path.join(__dirname, startPath)
@@ -46,8 +59,10 @@ function dbHandler (startPath) {
   return db
 }
 
-function rewriterHandler (db) {
-  const rewriter = {'/api/*': '/$1'}
+function rewriterHandler(db) {
+  const rewriter = {
+    '/api/*': '/$1'
+  }
   for (const key of Object.keys(db)) {
     const tmpKey = `/${key.replace(/_/g, '/')}`
     rewriter[tmpKey] = `/${key}`
