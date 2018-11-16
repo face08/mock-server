@@ -72,6 +72,9 @@ function rewriterHandler(db) {
 
     const tmpKey2 = `/${key.replace(/_/g, '/')}/*`
     rewriter[tmpKey2] = `/${key}/$1`
+
+    const tmpKey3 = `/${key.replace(/_/g, '/')}?*`
+    rewriter[tmpKey3] = `/${key}?$1`
   }
   console.log(rewriter)
   return rewriter
