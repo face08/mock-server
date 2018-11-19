@@ -10,7 +10,12 @@
 
 
 
+api添加版本号
+json保存回去
+现有服务器接口怎么增删改查{code:123,message:'',data:{}}
+
 
 
 https://github.com/typicode/json-server
 https://www.jianshu.com/p/ebb823bfbcb2
+http://www.ptbird.cn/express-method-override.html
